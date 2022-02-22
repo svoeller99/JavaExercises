@@ -1,4 +1,7 @@
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -11,8 +14,21 @@ public class EX2_IndicesSumming {
   //  index twice.  A sample array is provided, but code should perform for any array of any
   //  number of integers.
   public static Set<String> findIndicesMatchingTargetSum(final int[] inputArray, int targetSum) {
-    //YOUR CODE HERE
-    return null;
+    Set<String> outputSet = new HashSet<>();
+    Map<Integer,Integer> map = new HashMap<>();
+
+    for(int i=0;i<inputArray.length;i++){
+      map.put(inputArray[i],i );
+    }
+
+    for(int i=0;i<inputArray.length;i++){
+      if(map.containsKey(targetSum - inputArray[i])){
+        outputSet.add(i+", "+map.get(targetSum - inputArray[i]));
+        map.remove(inputArray[i]);
+      }
+    }
+
+    return outputSet;
   }
 
   // Optional: feel free to use this class to aid in solving the challenge. It provides the following:
