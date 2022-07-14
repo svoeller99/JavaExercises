@@ -20,6 +20,6 @@ public class EX1_DuplicatesFinder {
   
   public static void main(String[] args) {
 	  List<Integer> duplicatedNumbersList = findDuplicates(new int[]{4,6,1,4,2,1,6,5,3,6});
-	  System.out.println(duplicatedNumbersList.);
+	  System.out.println(duplicatedNumbersList);
   }
 }
