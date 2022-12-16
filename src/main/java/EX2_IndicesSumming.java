@@ -2,7 +2,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import com.robin.nike.EX2_IndicesSumming;
+import com.robin.nike.EX2_IndicesSumming.Indices;
 
 public class EX2_IndicesSumming {
   //Instructions:
@@ -12,7 +16,12 @@ public class EX2_IndicesSumming {
   //  number of integers.
   public static Set<String> findIndicesMatchingTargetSum(final int[] inputArray, int targetSum) {
     //YOUR CODE HERE
-    return null;
+	  Set<Indices> result = IntStream.range(0, inputArray.length).boxed()
+		      	 .flatMap(n1 -> IntStream.range(n1, inputArray.length)
+		         .filter(n2 -> n1!=n2 && inputArray[n1] + inputArray[n2] == targetSum)
+		         .mapToObj(n2 -> new EX2_IndicesSumming.Indices(n1, n2)))
+		         .collect(Collectors.toSet());
+    return result;
   }
 
   // Optional: feel free to use this class to aid in solving the challenge. It provides the following:
@@ -29,7 +38,7 @@ public class EX2_IndicesSumming {
     public String toString() {
       return indicesList.stream()
               .map(Objects::toString)
-              .collect(Collectors.joining(", "));
+              .collect(Collectors.joining(", ", "(", ")"));
     }
 
     @Override
@@ -45,4 +54,11 @@ public class EX2_IndicesSumming {
       return Objects.hash(indicesList);
     }
   }
+  
+
+  public static void main(String[] args) {
+	  Set<Indices> result = findIndicesMatchingTargetSum(new int[]{1, 5, 2, 0, 4, 11, 9, 6, 12, 7},9);
+	  System.out.println(result.toString());
+  }
+
 }
